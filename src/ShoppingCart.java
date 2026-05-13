@@ -1,18 +1,18 @@
 import java.util.ArrayList;
 import java.util.List;
+import discount.DiscountFactory;
+import discount.DiscountStrategy;
 
 public class ShoppingCart {
     private List<Product> items = new ArrayList<>();
-    private String discountType = "NONE";
-    private double discountAmount = 0;
+    private DiscountStrategy discountStrategy = new discount.NoDiscount();
 
     public void addItem(Product p) {
         items.add(p);
     }
 
     public void setDiscount(String type, double amount) {
-        this.discountType = type;
-        this.discountAmount = amount;
+        this.discountStrategy = DiscountFactory.create(type, amount);
     }
 
     public double calculateTotal() {
@@ -20,13 +20,6 @@ public class ShoppingCart {
         for (Product p : items) {
             total = total + p.getPrice();
         }
-
-        if (discountType.equals("PERCENTAGE")) {
-            total = total - (total * discountAmount / 100);
-        } else if (discountType.equals("FIXED")) {
-            total = total - discountAmount;
-        }
-
-        return total;
+        return discountStrategy.applyDiscount(total);
     }
 }
