@@ -1,3 +1,3 @@
-interface DiscountStrategy {
+public interface DiscountStrategy {
     double applyDiscount(double total);
 }
