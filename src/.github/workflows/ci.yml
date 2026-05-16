@@ -16,3 +16,4 @@ jobs:
           distribution: 'temurin'
       - name: Compile Java files
         run: javac src/*.java
+        
