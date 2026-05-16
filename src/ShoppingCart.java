@@ -1,11 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
-import discount.DiscountFactory;
-import discount.DiscountStrategy;
 
 public class ShoppingCart {
     private List<Product> items = new ArrayList<>();
-    private DiscountStrategy discountStrategy = new discount.NoDiscount();
+    private DiscountStrategy discountStrategy = new NoDiscount();
 
     public void addItem(Product p) {
         items.add(p);
