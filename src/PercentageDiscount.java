@@ -5,7 +5,10 @@ public class PercentageDiscount implements DiscountStrategy {
         this.percentage = percentage;
     }
 
+    // Arayüzden gelen indirim hesaplama metodunu eziyoruz (Strategy Pattern)
+    @Override
     public double applyDiscount(double total) {
+        // Yüzdelik indirim oranını uygulayıp net tutarı dönüyoruz
         return total - (total * percentage / 100);
     }
 }
