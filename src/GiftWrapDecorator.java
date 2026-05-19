@@ -6,6 +6,7 @@ public class GiftWrapDecorator extends CartDecorator {
         this.giftWrapCost = giftWrapCost;
     }
 
+    @Override
     public double calculateTotal() {
         return cart.calculateTotal() + giftWrapCost;
     }
