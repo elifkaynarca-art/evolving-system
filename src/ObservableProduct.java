@@ -2,26 +2,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ObservableProduct {
-    private String name;
-    private double price;
+    // Ürünü dinleyen gözlemcilerin listesi
     private List<PriceObserver> observers = new ArrayList<>();
 
-    public ObservableProduct(String name, double price) {
-        this.name = name;
-        this.price = price;
+    // Parametresiz constructor'ı açıkça tanımlayarak Product'taki hatayı çözüyoruz
+    public ObservableProduct() {
     }
 
-    public void addObserver(PriceObserver observer) {
+    // Yeni bir dinleyici (observer) kaydetme metodu
+    public void attach(PriceObserver observer) {
         observers.add(observer);
     }
 
-    public void setPrice(double newPrice) {
-        this.price = newPrice;
-        for (PriceObserver o : observers) {
-            o.onPriceChanged(name, newPrice);
-        }
+    // Dinleyiciyi listeden çıkarma metodu
+    public void detach(PriceObserver observer) {
+        observers.remove(observer);
     }
 
-    public double getPrice() { return price; }
-    public String getName() { return name; }
+    // Fiyat değiştiğinde tüm dinleyicileri tetikleyen metot
+    public void notifyObservers() {
+        for (PriceObserver observer : observers) {
+            // Dinleyicilere güncellenen nesnenin referansını paslıyoruz (Pull Model)
+            observer.update(this);
+        }
+    }
 }

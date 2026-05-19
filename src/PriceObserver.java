@@ -1,3 +1,4 @@
 public interface PriceObserver {
-    void onPriceChanged(String productName, double newPrice);
+    // Fiyat güncellendiğinde tetiklenecek ortak metot imzası
+    void update(ObservableProduct product);
 }
